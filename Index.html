@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" onclick="jump()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .game{
+            position: relative;
+            top: 0;
+            background-color: rgb(56, 50, 50);
+            height: 510px;
+        }
+        h1{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+        .land{
+            background-color: black;
+            height: 100px;
+            position: relative;
+            top: 23px;
+        }
+         .block{
+            background-color: rgb(99, 1, 1);
+            width: 103px;
+            height: 53px;
+            position: absolute;
+            top: 360px;
+          animation: block 1s infinite linear;
+        }
+        @keyframes block{
+    0%{left: -53px;}
+    100%{left: 1305px;}
+}
+        img{
+            position: relative;
+            left: 855px;
+            top: 4pc;
+        }
+  .aminate{
+    animation: jump 500ms;
+}
+@keyframes jump{
+    0%{top: 0px;}
+    50%{top: -50px;}
+    100%{bottom: 900px;}
+}
+    </style>
+</head>
+<body>
+    <h1 style="position: absolute;
+    bottom: 593px;
+    color: black;" id="displayScore"></h1>
+    <div class="game">
+        <h1 class="moon">C</h1>
+        <img id="panther" src="panther.gif" alt="">
+        <div class="block"></div>
+        <div class="land"></div>
+    </div>
+</body>
+<script>
+    var character=document.getElementById("panther");
+var block=document.getElementById("block");
+function jump(){
+    if(character.classList != "animate"){
+        character.classList.add("aminate"); 
+    }
+    setTimeout(function(){
+        character.classList.remove ("aminate"); 
+    },500)
+}
+var checkDead=setInterval(function()  {
+  var characterTop=  parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
+  var blockleft=  parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+
+  if(blockleft==130 && characterTop<20 && characterTop>0){
+     block.style.amination="none"
+     block.style.amination="none"
+     alert("You Lose. ");
+     location.reload();
+  }
+},10);
+
+var Score=document.getElementById("displayScore");
+ var score=0;
+ function showScore(){
+    score++;
+    displayScore.innerText="Score:"+ score + "m";
+}
+
+setInterval(showScore, 100);
+</script>
+</html>
